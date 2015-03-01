@@ -1,6 +1,8 @@
 # socket.io-game
 Simple game using socket.io
 
+![Alt text](http://dawid.myslak.me/images/socket-io-game.png "Socket.io Game")
+
 # Installation
 
 ```bash
