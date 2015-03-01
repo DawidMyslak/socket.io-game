@@ -1,7 +1,9 @@
-# socket.io-game
+# Socket.io Game
+
 Simple game using socket.io
 
 ![Alt text](http://dawid.myslak.me/images/socket-io-game.png "Socket.io Game")
+
 
 # Installation
 
@@ -19,3 +21,8 @@ node index.js
 ```
 
 Open your browser and run http://localhost:3000 - you can run it in few browser windows to check multiplayer gameplay.
+
+
+# Demo
+
+[Lunch demo](https://safe-fjord-5632.herokuapp.com)
