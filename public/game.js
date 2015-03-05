@@ -21,26 +21,26 @@ document.body.appendChild(canvas);
 var bgReady = false;
 var bgImage = new Image();
 bgImage.onload = function () {
-	bgReady = true;
+  bgReady = true;
 };
 bgImage.src = 'images/bg.png';
 
 var playerReady = false;
 var playerImage = new Image();
 playerImage.onload = function () {
-	playerReady = true;
+  playerReady = true;
 };
 playerImage.src = 'images/player.png';
 
 var enemyReady = false;
 var enemyImage = new Image();
 enemyImage.onload = function () {
-	enemyReady = true;
+  enemyReady = true;
 };
 enemyImage.src = 'images/enemy.png';
 
 var renderPlayers = function () {
- for (var player in players) {
+  for (var player in players) {
     if (players[player].id == playerId) {
       ctx.drawImage(playerImage, players[player].x, players[player].y);
     }
@@ -65,11 +65,11 @@ var renderStats = function () {
 }
 
 var render = function () {
-	if (bgReady && playerReady && enemyReady) {
-		ctx.drawImage(bgImage, 0, 0);
-		renderPlayers();
+  if (bgReady && playerReady && enemyReady) {
+    ctx.drawImage(bgImage, 0, 0);
+    renderPlayers();
     renderStats();
-	}
+  }
 };
 
 
@@ -77,7 +77,7 @@ var render = function () {
 /* Keyboard events */
 
 addEventListener('keydown', function (event) {
-	keyboard[event.keyCode] = true;
+  keyboard[event.keyCode] = true;
 
   if (event.keyCode == 13 && !playerName) {
     startConnection();
@@ -85,7 +85,7 @@ addEventListener('keydown', function (event) {
 }, false);
 
 addEventListener('keyup', function (event) {
-	delete keyboard[event.keyCode];
+  delete keyboard[event.keyCode];
 }, false);
 
 
@@ -93,24 +93,24 @@ addEventListener('keyup', function (event) {
 /* Socket events */
 
 socket.on('login', function (data) {
-	players = data.players;
+  players = data.players;
   numPlayers = data.numPlayers;
-	playerId = data.playerId;
+  playerId = data.playerId;
   loop();
 });
 
 socket.on('player joined', function (data) {
-	players[data.player.id] = data.player;
+  players[data.player.id] = data.player;
   numPlayers = data.numPlayers;
 });
 
 socket.on('player left', function (data) {
-	delete players[data.playerId];
+  delete players[data.playerId];
   numPlayers = data.numPlayers;
 });
 
 socket.on('update positions', function (data) {
-	players = data.players;
+  players = data.players;
 });
 
 
@@ -118,16 +118,16 @@ socket.on('update positions', function (data) {
 /* Game loop */
 
 var loop = function () {
-	var now = Date.now();
-	var delta = now - then;
+  var now = Date.now();
+  var delta = now - then;
 
-	if (delta > interval) {
-		render();
-		socket.emit('update keyboard', keyboard);
-	}
+  if (delta > interval) {
+    render();
+    socket.emit('update keyboard', keyboard);
+  }
 
-	then = now - (delta % interval);
-	requestAnimationFrame(loop);
+  then = now - (delta % interval);
+  requestAnimationFrame(loop);
 };
 
 var then = Date.now();
@@ -148,6 +148,6 @@ var startConnection = function () {
   playerName = playerEl.value;
   if (playerName) {
     document.body.removeChild(startEl);
-  	socket.emit('add player', playerName);
+    socket.emit('add player', playerName);
   }
 }
